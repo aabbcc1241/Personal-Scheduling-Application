@@ -2,25 +2,24 @@ import java.util.List;
 
 public class RoundRobin {
 
-    int [] temp;
-    int [] tempWaitinTime;
+    int[] temp;
+    int[] tempWaitinTime;
     int commBT, k, tq;
     int[][] d;
     int btcache;
 
-    void start( ){
+    void start() {
         for (int i = 0; i < d.length; i++) {
-            int bt  = d[i][1];
-            if( bt > 0){
-                if( bt <= tq){
-                    temp[i] = btcache+bt;
+            int bt = d[i][1];
+            if (bt > 0) {
+                if (bt <= tq) {
+                    temp[i] = btcache + bt;
                     btcache = temp[i];
                     k += bt;
                     bt -= bt;
 
-                }
-                else{
-                    temp[i] = btcache+tq;
+                } else {
+                    temp[i] = btcache + tq;
                     btcache = temp[i];
                     bt -= tq;
                     k += tq;
@@ -30,7 +29,7 @@ public class RoundRobin {
 
             }
         }
-        if( k!= commBT)
+        if (k != commBT)
             start();
     }
 
@@ -43,19 +42,20 @@ public class RoundRobin {
         System.out.println("============================================ ");
         Object[] job = jobList.toArray();
         for (int i : temp) {
-            Job job1 = (Job) job[c-1];
-            System.out.println( "    " + c + "       |     " + i +"           |   "+(i-job1.getCpuTime()));
+            Job job1 = (Job) job[c - 1];
+            System.out.println("    " + c + "       |     " + i + "           |   " + (i - job1.getCpuTime()));
             System.out.println("----------------------------------------");
             avgTurnArroundTime += i;
-            avgWaitigTime += (i-job1.getCpuTime());
+            avgWaitigTime += (i - job1.getCpuTime());
             c++;
         }
         System.out.println("===============================================");
-        System.out.println( "Avg waiting time = " + avgWaitigTime/temp.length);
+        System.out.println("Avg waiting time = " + avgWaitigTime / temp.length);
         System.out.println("===============================================");
-        System.out.println( "Avg turn round time = " + avgTurnArroundTime/temp.length);
+        System.out.println("Avg turn round time = " + avgTurnArroundTime / temp.length);
         System.out.println("===============================================");
     }
+
     public void run(List<Job> jobList, int quantum) {
 
         int pcount = jobList.size();
@@ -63,7 +63,7 @@ public class RoundRobin {
 
         temp = new int[pcount];
         int count = 0;
-        for(Job job:jobList){
+        for (Job job : jobList) {
             d[count][0] = count;
 
             int m = job.getCpuTime();

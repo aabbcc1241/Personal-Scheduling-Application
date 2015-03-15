@@ -1,21 +1,13 @@
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 public class Job {
-    private int id, submitTime, CPUTime, CPUTimeLeft;
-
-    private int startTime = 0, endTime = 0;
-
-
     public int ProcessCompletionTime;
     public int processArrivalTime;
     public int waitingTime;
     public int turnAroundTime;
+    private int id, submitTime, CPUTime, CPUTimeLeft;
+    private int startTime = 0, endTime = 0;
     private JobFinishEvent evt;
 
-    private int arrivalTime,cpuTime,processId;
+    private int arrivalTime, cpuTime, processId;
 
     public Job(int id, int submitTime, int CPUTime, JobFinishEvent evt) {
         super();
@@ -39,8 +31,8 @@ public class Job {
     }
 
     public void tick(int sysTime) {
-        CPUTimeLeft --;
-        if (CPUTimeLeft <= 0){
+        CPUTimeLeft--;
+        if (CPUTimeLeft <= 0) {
             endTime = sysTime;
             evt.onFinish(this);
         }

@@ -1,8 +1,5 @@
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Queue;
 
 /* implement this class for all three strategies */
 
